@@ -1,4 +1,4 @@
-import { BiCaretDown, BiSearch, BiCheck } from 'react-icons/bi';
+import { BiCaretDown, BiCheck } from 'react-icons/bi';
 import { useState } from 'react';
 
 /* DROPDOWN SORT BY MENU SECTION */
@@ -45,13 +45,13 @@ const Search = ({query, onQueryChange, sortBy, onSortByChange, orderBy, onOrderB
     return (
 
         /* SEARCH FORM */
-        <form className="flex divide-x w-96 justify-between"> 
+        <form className="flex w-96 justify-between"> 
 
                 {/* DROPDOWN BUTTON */}
-                <div className="bg-gray-200 hover:bg-gray-400 hover:text-white">
+                <div className="border-b hover:bg-gray-400 hover:text-white ml-7">
                     <button onClick={() => {setToggleSort(!toggleSort)}} type="button" className="flex m-1 mx-2" id="options-menu">
                         Sort by
-                        <BiCaretDown className="mt-1" />
+                        <BiCaretDown className="mt-1 ml-1" />
                     </button>
                 </div>
 
@@ -59,7 +59,7 @@ const Search = ({query, onQueryChange, sortBy, onSortByChange, orderBy, onOrderB
                 { 
                     toggleSort &&
 
-                    <div className="absolute mt-9 py-1 shadow-lg bg-white">
+                    <div className="absolute mt-9 py-1 ml-8 shadow-lg bg-white">
                         <Dropdown toggle={toggleSort}
                             sortBy={sortBy}
                             onSortByChange={mySort => onSortByChange(mySort)}
@@ -73,13 +73,9 @@ const Search = ({query, onQueryChange, sortBy, onSortByChange, orderBy, onOrderB
                 {/* SEARCH INPUT */}
                 <div>
                     <input  onChange={(event) => {onQueryChange(event.target.value)}} value={query} type="text" placeholder="Search..." required 
-                    className="outline-none p-1 border-2 w-64" />
+                    className="outline-none p-1 border-b w-64 placeholder:text-black" />
                 </div>
-
-                {/* SUBMIT SEARCH BUTTON */}
-                <div className="bg-gray-200">
-                    <BiSearch className="text-xl mx-1.5 m-2" />
-                </div>      
+     
         </form> 
 
     );
