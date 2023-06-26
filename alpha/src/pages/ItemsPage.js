@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { AiOutlineUnorderedList } from 'react-icons/ai';
+import { BsSendCheck, BsSendPlus } from 'react-icons/bs';
 import Search from '../components/Search';
 import ItemInfo from '../components/ItemInfo';
 import { BiAddToQueue } from 'react-icons/bi';
@@ -19,7 +20,7 @@ function ItemsPage() {
   let[query, setQuery] = useState("");
   let[sortBy, setSortBy] = useState("title");
   let[orderBy, setOrderBy] = useState("asc");
-  let[toggleList, setToggleList] = useState(false);
+  let[toggleList, setToggleList] = useState(true);
   let[toggleCreate, setToggleCreate] = useState(false);
   let[formData, setFormData] = useState(clearData);
   let[displayOutput, setDisplayOutput] = useState(false);
@@ -74,10 +75,14 @@ function ItemsPage() {
     fetchData()
   }, [fetchData]);
 
+  /* OUTPUT MESSAGE STATING ENTRY HAS BEEN ADDED */
   const Output = () => {
     return (
       <div className="flex justify-center">
-        <label className="text-green-800">New entry successfully added.</label>
+        <label className="text-green-800 flex">
+          <BsSendCheck className="mt-1 mr-2"/>
+          New entry successfully added.
+        </label>
       </div>
     );
   }
@@ -85,7 +90,7 @@ function ItemsPage() {
   return (
     <div className="w-96 space-y-4 mt-5">
 
-      {/* NOTES PAGE HEADER SECTION*/}
+      {/* HEADER SECTION*/}
       <div>
           <div className="flex text-4xl place-content-center ">
             <div>
@@ -94,10 +99,11 @@ function ItemsPage() {
           </div>
       </div>
 
-      {/* NOTES PAGE NAVBAR SECTION */}
+      {/* NAVBAR SECTION */}
       <div className="flex place-content-around">
 
-      <div className={`px-12 pb-2 pt-2 hover:bg-gray-400 hover:text-white ${toggleList ? 'bg-gray-200' : ''} ${toggleCreate ? 'border-b-2' : ''}`}>
+        {/* LIST MENU ITEM */}
+        <div className={`px-12 pb-2 pt-2 hover:bg-gray-400 hover:border-gray-400 hover:text-white ${toggleList ? 'bg-gray-200' : ''} ${toggleCreate ? 'border-b-2' : ''}`}>
           <button type="button" className="flex px-5" 
             onClick={() => {
                 setToggleList(true);
@@ -108,9 +114,10 @@ function ItemsPage() {
             <AiOutlineUnorderedList className="mt-1 mr-1" />
             List
           </button>
-      </div>
-
-        <div className={`px-10 pb-2 pt-2 hover:bg-gray-400 hover:text-white ${toggleCreate ? 'bg-gray-200' : ''} ${toggleList ? 'border-b-2' : ''}`}>
+        </div>
+        
+        {/* CREATE MENU ITEM */}
+        <div className={`px-10 pb-2 pt-2 hover:bg-gray-400 hover:border-gray-400 hover:text-white ${toggleCreate ? 'bg-gray-200' : ''} ${toggleList ? 'border-b-2' : ''}`}>
             <button type="button" className="flex px-5" 
               onClick={() => {
                   setToggleCreate(true);
@@ -125,12 +132,11 @@ function ItemsPage() {
 
       </div>
 
-      {/* LIST NOTES SECTION */}
+      {/* LIST OF NOTES*/}
       <div>
-
         <div>
         {
-          toggleList===true && 
+          toggleList && 
 
           <div className="w-96">
 
@@ -170,7 +176,6 @@ function ItemsPage() {
         }
 
         </div>
-
       </div> 
 
       {/* ADD ITEM SECTION */}  
@@ -179,7 +184,7 @@ function ItemsPage() {
           toggleCreate && 
 
           <div>
-            <form className="flex-col">
+            <form className="flex-col mt-5">
               
               <div className="mr-2">
                   {/* TITLE */}
@@ -220,9 +225,9 @@ function ItemsPage() {
 
                   {/* SUBMIT BUTTON */}
                   <div className="flex mt-4 justify-end mb-4 mr-1">
-                      <button type="submit" className="bg-gray-200 hover:bg-gray-400 hover:text-white p-1 px-2"
+                      <button type="submit" className="flex bg-gray-200 hover:bg-gray-400 hover:text-white p-1 px-2"
                         onClick={() => formDataPublish()}>
-                        OK
+                        <BsSendPlus className="mt-1 mr-1" /> OK
                       </button>
                   </div>
                   

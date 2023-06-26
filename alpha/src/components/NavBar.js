@@ -3,7 +3,9 @@ import { GrArticle, GrCircleInformation } from 'react-icons/gr';
 import { AiOutlineHome } from 'react-icons/ai';
 import { BiPin } from 'react-icons/bi';
 
+
 const NavBar = () => {
+
     return (
 
         /* NAVBAR SECTION */
