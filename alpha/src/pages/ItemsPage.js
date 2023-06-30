@@ -92,9 +92,9 @@ function ItemsPage() {
 
       {/* HEADER SECTION*/}
       <div>
-          <div className="flex text-4xl place-content-center ">
+          <div className="flex place-content-center">
             <div>
-              <h1 className="text-3xl">Notes</h1>
+              <h1 className="text-3xl mb-5">Notes</h1>
             </div>
           </div>
       </div>

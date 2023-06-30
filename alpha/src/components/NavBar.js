@@ -13,7 +13,7 @@ const NavBar = () => {
             <ul className="flex space-x-4 mt-2">
 
                 {/* HOME MENU ITEM */}
-                <li className="p-2 hover:border-b-2">
+                <li className="p-2 hover:border-b-2 hover:border-black">
                     <Link to="/" className="flex-col flex-wrap">
                         <AiOutlineHome className="ml-1.5 text-2xl" />
                         <p className="text-sm">Home</p>
@@ -21,7 +21,7 @@ const NavBar = () => {
                 </li>
 
                 {/* ARTICLES MENU ITEM */}
-                <li className="p-2 hover:border-b-2">
+                <li className="p-2 hover:border-b-2 hover:border-black">
                     <Link to="/articles" className="flex-col flex-wrap">
                         <GrArticle className="ml-3 text-2xl" />
                         <p className="text-sm">Articles</p>
@@ -29,15 +29,15 @@ const NavBar = () => {
                 </li>
 
                 {/* NOTES MENU ITEM */}
-                <li className="p-2 hover:border-b-2">
-                    <Link to="/pins" className="flex-col flex-wrap">
+                <li className="p-2 hover:border-b-2 hover:border-black">
+                    <Link to="/notes" className="flex-col flex-wrap">
                         <BiPin className="ml-2 text-2xl" />
                         <p className="text-sm">Notes</p>
                     </Link>
                 </li>
 
                 {/* ABOUT MENU ITEM */}
-                <li className="p-2 hover:border-b-2">
+                <li className="p-2 hover:border-b-2 hover:border-black">
                     <Link to="/about" className="flex-col flex-wrap" >
                         <GrCircleInformation className="ml-2 text-2xl" />
                         <p className="text-sm">About</p>

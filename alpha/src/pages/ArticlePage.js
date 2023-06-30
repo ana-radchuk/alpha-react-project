@@ -9,13 +9,22 @@ const ArticlePage = () => {
     )
 
     return (
-        <div>
-            <h1>{article.title}</h1>
-            {article.content.map(
-                paragraph => (
-                    <p>{paragraph}</p>
-                )
-            )}
+        <div className="space-y-4 mt-5">
+
+            {/* ARTICLE HEADER */}
+            <h1 className="grid place-content-center text-3xl px-10 text-center mb-">
+                {article.title}
+            </h1>
+
+                {/* ARTICLE BODY */}
+                {article.content.map(
+                    (paragraph, i) => (
+                     <p key={i} className="px-10 indent-8">
+                        {paragraph}
+                    </p>
+                    )
+                )}
+
         </div>
     )
 }
