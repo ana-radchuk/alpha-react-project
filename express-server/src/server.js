@@ -1,29 +1,32 @@
 import express from 'express';
-
-let articlesInfo = [{
-    name: 'learn-react',
-    upvotes: 0,
-    comments: []
-}, {
-    name: 'learn-node',
-    upvotes: 0,
-    comments: []
-}, {
-    name: 'mongodb',
-    upvotes: 0,
-    comments: []
-}]
+import { db, connectToDb } from './db.js'; 
 
 const app = express();
 app.use(express.json());
 
-/* ARTICLE UPVOTES */
-app.put('/api/articles/:name/upvote', (req, res) => {
+/* GET ARTICLE INFO */
+app.get('/api/articles/:name', async (req, res) => {
     const { name } = req.params;
-    const article = articlesInfo.find(a => a.name === name);
-    
+
+    const article = await db.collection('articles').findOne({ name });
+
     if (article) {
-        article.upvotes += 1;
+        res.json(article);
+    } else {
+        res.sendStatus(404);
+    }
+});
+
+/* ARTICLE UPVOTES */
+app.put('/api/articles/:name/upvote', async (req, res) => {
+    const { name } = req.params;
+
+    await db.collection('articles').updateOne({ name }, {
+        $inc: { upvotes: 1 }
+    });
+    
+    const article = await db.collection('articles').findOne({ name });
+    if (article) {
         res.send(`The ${name} article now has ${article.upvotes} upvotes.`)
     } else {
         res.send('That article doesn\'t exist.');
@@ -31,20 +34,26 @@ app.put('/api/articles/:name/upvote', (req, res) => {
 });
 
 /* ADD COMMENT */
-app.post('/api/articles/:name/comment', (req, res) => {
+app.post('/api/articles/:name/comment', async (req, res) => {
     const { name } = req.params;
     const { postedBy, text } = req.body;
+    
+    await db.collection('articles').updateOne({ name }, {
+        $push: { comments: { postedBy, text }}
+    });
 
-    const article = articlesInfo.find(a => a.name === name);
-
+    const article = await db.collection('articles').findOne({ name });
     if (article) {
-        article.comments.push({postedBy, text});
         res.send(article.comments);
     } else {
         res.send('That article doesn\'t exist.');
     }
 });
 
-app.listen(8000, () => {
-    console.log('Server is listening on port 8000');
+
+connectToDb(() => {
+    console.log('Successfully connected to the database');
+    app.listen(8000, () => {
+        console.log('Server is listening on port 8000');
+    });
 });
