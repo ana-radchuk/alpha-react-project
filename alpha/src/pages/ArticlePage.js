@@ -12,7 +12,7 @@ const ArticlePage = () => {
         <div className="space-y-4 mt-5">
 
             {/* ARTICLE HEADER */}
-            <h1 className="grid place-content-center text-3xl px-10 text-center mb-">
+            <h1 className="grid place-content-center text-3xl px-10 text-center mb-10">
                 {article.title}
             </h1>
 
