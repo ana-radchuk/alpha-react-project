@@ -11,8 +11,6 @@ const ArticlePage = () => {
 
     if (!article) {
         return <NotFoundPage />
-    } else {
-
     }
 
     return (
