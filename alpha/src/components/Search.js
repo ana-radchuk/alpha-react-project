@@ -72,7 +72,7 @@ const Search = ({query, onQueryChange, sortBy, onSortByChange, orderBy, onOrderB
 
                 {/* SEARCH INPUT */}
                 <div>
-                    <input  onChange={(event) => {onQueryChange(event.target.value)}} value={query} type="text" placeholder="Search..." required 
+                    <input onChange={(event) => {onQueryChange(event.target.value)}} value={query} type="text" placeholder="Search..." required 
                     className="outline-none p-1 border-b w-64 placeholder:text-black" />
                 </div>
      

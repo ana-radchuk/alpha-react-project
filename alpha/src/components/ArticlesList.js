@@ -5,18 +5,16 @@ const ArticlesList = ({ articles }) => {
         <>
         {
             articles.map(article => (
-                <div key={article.name} className="px-10">
+                <div key={article.name} dir="ltr" className="px-10 hover:border-s-2">
                     <Link to={`/articles/${article.name}`}>
         
                         {/* ARTICLE HEADER */}
-                        <h2 className="font-bold mb-2 hover:underline hover:underline-offset-4">
+                        <h2 className="font-bold mb-2">
                             {article.title}
                         </h2>
         
                         {/* ARTICLE PARAGRAPH */}
-                        <p className="mb-10">
-                            {article.content[0].substring(0,150)}...
-                        </p>
+                        <p className="mb-10">{article.content[0].substring(0, 150)}...</p>
         
                     </Link>
                 </div>

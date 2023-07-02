@@ -1,13 +1,34 @@
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import articles from './article-content';
+import axios from 'axios';
 import NotFoundPage from '../pages/NotFoundPage';
+import CommentsList from '../components/CommentsList';
+import { BiLike } from 'react-icons/bi';
 
 const ArticlePage = () => {
+    const [articleInfo, setArticleInfo] = useState({ upvotes: 0, comments: []})
     const { articleId } = useParams();
+
+    useEffect(() => {
+        const loadArticleInfo = async () => {
+            const response = await axios.get(`/api/articles/${articleId}`);
+            const newArticleInfo = response.data;
+            setArticleInfo(newArticleInfo);
+        }
+
+        loadArticleInfo();
+    }, []);
 
     const article = articles.find(
         article => article.name === articleId
     )
+
+    const addUpvote = async () => {
+        const response = await axios.put(`/api/articles/${articleId}/upvote`);
+        const updatedArticle = response.data;
+        setArticleInfo(updatedArticle);
+    }
 
     if (!article) {
         return <NotFoundPage />
@@ -17,18 +38,33 @@ const ArticlePage = () => {
         <div className="space-y-4 mt-5">
 
             {/* ARTICLE HEADER */}
-            <h1 className="grid place-content-center text-3xl px-10 text-center mb-10">
+            <h1 className="grid place-content-center text-3xl px-10 text-center mb-5">
                 {article.title}
             </h1>
 
-                {/* ARTICLE BODY */}
-                {article.content.map(
-                    (paragraph, i) => (
-                     <p key={i} className="px-10 indent-8">
+             {/* UPVOTE SECTION */}
+            <div className="flex place-content-end px-10 text-center mb-10 mr-10">
+
+                {/* UPVOTE BUTTON */}
+                <button onClick={addUpvote}>
+                    <BiLike className="mr-1 hover:text-sky-400" />
+                </button>
+
+                <p className="text-xs">
+                    ({articleInfo.upvotes})
+                </p>
+            </div>
+
+            {/* ARTICLE BODY */}
+            {article.content.map(
+                (paragraph, i) => (
+                    <p key={i} className="px-20 indent-8">
                         {paragraph}
                     </p>
-                    )
-                )}
+                )
+            )}
+
+            <CommentsList comments={articleInfo.comments} />    
 
         </div>
     )
