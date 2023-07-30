@@ -5,10 +5,12 @@ import axios from 'axios';
 import NotFoundPage from '../pages/NotFoundPage';
 import CommentsList from '../components/CommentsList';
 import { BiLike } from 'react-icons/bi';
+import AddCommentForm from '../components/AddCommentForm';
+import { BsSendPlus } from 'react-icons/bs';
 
 const ArticlePage = () => {
-    const [articleInfo, setArticleInfo] = useState({ upvotes: 0, comments: []})
     const { articleId } = useParams();
+    const [articleInfo, setArticleInfo] = useState({ upvotes: 0, comments: []})
 
     useEffect(() => {
         const loadArticleInfo = async () => {
@@ -64,7 +66,30 @@ const ArticlePage = () => {
                 )
             )}
 
-            <CommentsList comments={articleInfo.comments} />    
+            {/* COMMENTS SECTION */}
+            <div className="flex-col">
+
+                {/* COMMENTS HEADER SECTION */}
+                <div className="flex w-9 ">
+                    <div>
+                        <h1 className="mt-10 mb-5 mx-20 font-bold text-xl">
+                            Comments
+                        </h1>
+                    </div>
+                </div>
+
+                {/* ADD COMMENT FORM */}
+                    <AddCommentForm
+                        articleName={articleId}
+                        onArticleUpdated={updatedArticle => setArticleInfo(updatedArticle)} 
+                    />
+
+                {/* LIST COMMENTS SECTION */}
+                <div className="flex-col">
+                    <CommentsList comments={articleInfo.comments} />  
+                </div>
+
+            </div>  
 
         </div>
     )

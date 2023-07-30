@@ -3,10 +3,6 @@ import { BsPersonCircle } from 'react-icons/bs';
 const CommentsList = ({ comments }) => (
     <div className="mx-20">
 
-        <h1 className="mt-10 mb-5 font-bold text-xl">
-            Comments:
-        </h1>
-
         {comments.map(comment => (
             <div className="my-5 flex-col" 
                 key={comment.postedBy + ': ' + comment.text}>
