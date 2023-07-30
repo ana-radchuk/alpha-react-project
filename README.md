@@ -2,10 +2,8 @@
 
 Notes:
 
-**************************
 Start server: npm run dev
 Start app: npm run start
-**************************
 
 alpha:
 npx create-react-app alpha
